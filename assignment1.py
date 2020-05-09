@@ -59,6 +59,29 @@ def get_formatted_list(loading_csv_file):
     return songs_list
 
 
+def calculating_learned_songs():
+    """ calculating_learned_songs function will calculate the all learned songs in csv file"""
+    import csv
+    list_of_songs = list(csv.reader(open("songs.csv")))
+    song = 0
+    for i in list_of_songs:
+        if i[3] == "l":
+            song += 1
+    return song
+
+
+def calculating_unlearned_songs():
+    """ calculating_unlearned_songs function will calculate the all unlearned songs in csv file"""
+    import csv
+    list_of_songs = list(csv.reader(open("songs.csv")))
+    song = 0
+    for i in list_of_songs:
+        if i[3] == "u":
+            song += 1
+    return song
+
+
+
 def main():
     """ Main function will take user input and then according to the input take action like L - to list all songs from
      csv file, A - Add new song into csv file, C - to complete a song and Q-  to quit"""
