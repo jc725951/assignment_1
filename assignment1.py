@@ -86,13 +86,22 @@ def main():
     """ Main function will take user input and then according to the input take action like L - to list all songs from
      csv file, A - Add new song into csv file, C - to complete a song and Q-  to quit"""
     print("Songs to learn 1.0 - by Aaishwinder Kaur")
-    choice = displaying_menu_choices()                           # display menu
+    learned_songs = calculating_learned_songs()  # give all learned songs
+    unlearned_songs = calculating_unlearned_songs()  # give all unlearned songs
+    total_songs = learned_songs + unlearned_songs  # calculate total number of songs
+    print("{} songs loaded".format(total_songs))  # prints total songs
+    choice = displaying_menu_choices()  # display menu
     while choice != "Q":
-        if choice == "L":                                   # display list of songs
+        if choice == "L":  # display list of songs
             get_formatted_list(loading_csv_file())
-            choice = displaying_menu_choices()                  # display menu
+            print("{} songs learned, {} songs still to learn".format(learned_songs, unlearned_songs))
+            choice = displaying_menu_choices()  # display menu
         elif choice == "A":
-            choice = displaying_menu_choices()                   # display menu
+            choice = displaying_menu_choices()  # display menu
         elif choice == "C":
-            choice = displaying_menu_choices()                  # display menu
-    print("Have a nice day :")           # end message on giving input q
+            choice = displaying_menu_choices()  # display menu
+    print("{} songs saved to songs.csv".format(total_songs))
+    print("Have a nice day :")  # end message on giving input q
+
+
+main()
