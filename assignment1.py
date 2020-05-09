@@ -20,6 +20,20 @@ def displaying_menu_choices():
     return user_choice
 
 
+def loading_csv_file():
+    """ This function will load the csv file into program """
+    open_file = open("songs.csv", "r")              # load csv file
+    created_list = open_file.readlines()            # read all lines in the form of paragraph
+    songs = []                                      # empty songs list
+    for line in created_list:
+        split_line = line.split(",")                # split paragraph from ','
+        split_line[2] = int(split_line[2])          # change string of year into integer
+        split_line[3] = split_line[3][0]            # remove n from 3rd index
+        songs.append(split_line)                    # append all songs to the empty songs list
+        open_file.close()                           # close the file
+    return songs
+
+
 def main():
     """ Main function will take user input and then according to the input take action like L - to list all songs from
      csv file, A - Add new song into csv file, C - to complete a song and Q-  to quit"""
