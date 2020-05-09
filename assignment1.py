@@ -102,26 +102,57 @@ def adding_new_song_to_list():
     file1.close()
 
 
+def mark_unlearn_to_learn():
+    """ Marking unlearned song to learned"""
+    x = 0
+    count = 0
+    import csv
+    songs = list(csv.reader(open("songs.csv")))
+    for i in songs:
+        if songs[x][3] == "u":
+            count = count+1
+        x = x+1
+    if count == 0:
+        print("No more songs to learn!")
+    else:
+        song = input("Enter the number of song to mark as learned :")
+        song_number = int(song)
+        if song_number+1 > len(songs) or song_number < 0:
+            print("Invalid Sequence Selection Try Again")
+        else:
+            if songs[song_number][3] == "l":
+                print("Your selected song is already Learned")
+            else:
+                songs[song_number][3] = "l"
+                import csv
+                with open("songs.csv", "w", newline='') as fp:
+                    a = csv.writer(fp, delimiter=',')
+                    a.writerows(songs)
+                print("Your selected Song is marked as Learned")
+
+
 def main():
     """ Main function will take user input and then according to the input take action like L - to list all songs from
      csv file, A - Add new song into csv file, C - to complete a song and Q-  to quit"""
     print("Songs to learn 1.0 - by Aaishwinder Kaur")
-    learned_songs = calculating_learned_songs()  # give all learned songs
-    unlearned_songs = calculating_unlearned_songs()  # give all unlearned songs
-    total_songs = learned_songs + unlearned_songs  # calculate total number of songs
-    print("{} songs loaded".format(total_songs))  # prints total songs
-    choice = displaying_menu_choices()  # display menu
+    learned_songs = calculating_learned_songs()                # give all learned songs
+    unlearned_songs = calculating_unlearned_songs()              # give all unlearned songs
+    total_songs = learned_songs + unlearned_songs              # calculate total number of songs
+    print("{} songs loaded". format(total_songs))             # prints total songs
+    choice = displaying_menu_choices()                           # display menu
     while choice != "Q":
-        if choice == "L":  # display list of songs
+        if choice == "L":                                   # display list of songs
             get_formatted_list(loading_csv_file())
             print("{} songs learned, {} songs still to learn".format(learned_songs, unlearned_songs))
-            choice = displaying_menu_choices()  # display menu
+            choice = displaying_menu_choices()                  # display menu
         elif choice == "A":
-            choice = displaying_menu_choices()  # display menu
+            adding_new_song_to_list()                            # display function to add new song
+            choice = displaying_menu_choices()                   # display menu
         elif choice == "C":
-            choice = displaying_menu_choices()  # display menu
+            mark_unlearn_to_learn()
+            choice = displaying_menu_choices()                  # display menu
     print("{} songs saved to songs.csv".format(total_songs))
-    print("Have a nice day :")  # end message on giving input q
+    print("Have a nice day :")           # end message on giving input q
 
 
 main()
