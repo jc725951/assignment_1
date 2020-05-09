@@ -34,6 +34,12 @@ def loading_csv_file():
     return songs
 
 
+def sorting_songs(songs):
+    """"This function will sort the list of songs"""
+    songs.sort(key=itemgetter(1, 0))            # sort songs according to index 1 and 0
+    return songs
+
+
 def main():
     """ Main function will take user input and then according to the input take action like L - to list all songs from
      csv file, A - Add new song into csv file, C - to complete a song and Q-  to quit"""
