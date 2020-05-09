@@ -81,6 +81,26 @@ def calculating_unlearned_songs():
     return song
 
 
+def adding_new_song_to_list():
+    """ This function will ask user to give inputs for title, artist and year of song and then add it to the csv file
+    as unlearned song"""
+    title = input("Please enter the title of song : ").capitalize()        # take input for title
+    while not title.isalpha():                                          # checks error
+        print("Invalid Input. Please enter valid value.")
+        title = input("Please enter the title of song :").capitalize()     # take input again after checking error
+    artist = input("Please enter the artist of song :").capitalize()        # take input for artist
+    while not artist.isalpha():                                                # checks error
+        print("Invalid Input.  Please enter valid value.")
+        artist = input("Please enter the artist of song :").capitalize()   # take input again after checking error
+    year = input("Please enter the year of song :").capitalize()            # take input for year
+    while not year.isdigit() or int(year) <= 0:                               # checks error
+        print("Invalid Input.  Please enter valid value.")
+        year = input("Please enter the year for song :").capitalize()         # take input again after checking error
+    print("{} by {} ({}) added to song list".format(title, artist, year))
+    file1 = open("songs.csv", "a")                                               # append song
+    file1.writelines("{},{},{},u\n".format(title, artist, year))
+    file1.close()
+
 
 def main():
     """ Main function will take user input and then according to the input take action like L - to list all songs from
