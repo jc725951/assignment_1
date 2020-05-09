@@ -6,6 +6,9 @@ GitHub URL:https://github.com/jc725951/assignment_1.git
 """
 
 
+from operator import itemgetter
+
+
 def displaying_menu_choices():
     """" This function asks user to choose from menu choices that are L - to list all songs from csv file, A - Add new
      song into csv file, C - to complete a song and Q-  to quit """
@@ -38,6 +41,16 @@ def sorting_songs(songs):
     """"This function will sort the list of songs"""
     songs.sort(key=itemgetter(1, 0))            # sort songs according to index 1 and 0
     return songs
+
+
+def formatting_list_of_songs(songs):
+    """ This function will print the formatted list of songs"""
+    for i in range(len(songs)):
+        if 'u' in songs[i]:
+            print("{}.{:>3s} \t {} \t - {} \t({})".format(i, "*", songs[i][0], songs[i][1], songs[i][2],  songs[i][3]))
+        else:
+            print("{}.{:>3s} \t {} \t - {} \t({})".format(i, " ", songs[i][0], songs[i][1], songs[i][2],  songs[i][3]))
+
 
 
 def main():
