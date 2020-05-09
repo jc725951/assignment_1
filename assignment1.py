@@ -52,6 +52,12 @@ def formatting_list_of_songs(songs):
             print("{}.{:>3s} \t {} \t - {} \t({})".format(i, " ", songs[i][0], songs[i][1], songs[i][2],  songs[i][3]))
 
 
+def get_formatted_list(loading_csv_file):
+    """" This function will pass the csv file through other functions to give a complete songs list"""
+    sorted_list_of_songs = sorting_songs(loading_csv_file)
+    songs_list = formatting_list_of_songs(sorted_list_of_songs)
+    return songs_list
+
 
 def main():
     """ Main function will take user input and then according to the input take action like L - to list all songs from
@@ -60,6 +66,7 @@ def main():
     choice = displaying_menu_choices()                           # display menu
     while choice != "Q":
         if choice == "L":                                   # display list of songs
+            get_formatted_list(loading_csv_file())
             choice = displaying_menu_choices()                  # display menu
         elif choice == "A":
             choice = displaying_menu_choices()                   # display menu
